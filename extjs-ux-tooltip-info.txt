@@ -1,0 +1,30 @@
+Ext.override(Ext.form.Field, {
+    afterRender: function () {
+        if (this.helpText) {
+            debugger;
+            var label = findLabel(this);
+            if (label) {
+                var helpImage = label.createChild({
+                    tag: 'img',
+                    src: 'information.png',
+                    title: this.helpText,
+                    style: 'margin-bottom: 0px; margin-left: 5px; padding: 0px;'
+                });
+            }
+        }
+        Ext.form.Field.superclass.afterRender.call(this);
+        this.initEvents();
+    }
+});
+
+var findLabel = function (field) {
+    var wrapDiv = null;
+    var label = null;
+    wrapDiv = field.getEl().up('div.x-form-item');
+    if (wrapDiv) {
+        label = wrapDiv.child('label');
+    }
+    if (label) {
+        return label;
+    }
+};
